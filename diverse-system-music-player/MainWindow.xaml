@@ -45,6 +45,6 @@
                 <Label x:Name="composer" Content="xi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="#00808080" FontFamily="Keep Calm Med" FontSize="30" Margin="0,50,0,0" Foreground="#FFFFFFFF" />
             </Grid>
         </Grid>
-        <Label x:Name="albumcode" Content="DVSP-0167" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00808080" FontFamily="Keep Calm Med" FontSize="11" Margin="0,25,0,0" Foreground="#7F808080" />
+        <Label x:Name="developer" Content="Developer: AlphaGot" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00808080" FontFamily="Keep Calm Med" FontSize="11" Margin="0,25,25,0" Foreground="#7F808080" />
     </Grid>
 </Window>
