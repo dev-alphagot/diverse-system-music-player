@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:diverse_system_music_player"
         mc:Ignorable="d"
-        Title="DiverseSystem" Height="540" Width="960" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Background="Black" Foreground="White">
+        Title="DiverseSystem" Height="540" WindowStartupLocation="CenterScreen" Background="Black" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="NanumBarunGothic" Icon="/worldfragments.jpg" Width="960" MinHeight="540" MaxHeight="540" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" UseLayoutRounding="False" WindowStyle="ToolWindow" MinWidth="960">
     <Grid>
-        <Image x:Name="bg" Stretch="UniformToFill" Source="/worldfragments.jpg" HorizontalAlignment="Center" VerticalAlignment="Top" OpacityMask="#3F000000">
+        <Image x:Name="bg" Stretch="UniformToFill" Source="/worldfragments.jpg" HorizontalAlignment="Center" VerticalAlignment="Top" OpacityMask="#3F000000" Margin="0,0,0,0">
             <Image.Effect>
                 <BlurEffect Radius="30"/>
             </Image.Effect>
         </Image>
-        <Image x:Name="album" Stretch="UniformToFill" Source="/worldfragments.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" OpacityMask="#FA000000" Width="300" Height="300" />
+        <Image x:Name="album" Stretch="UniformToFill" Source="/worldfragments.jpg" HorizontalAlignment="Center" VerticalAlignment="Center" OpacityMask="#FA000000" Width="250" Height="250" />
 
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Border BorderBrush="Black" BorderThickness="0" CornerRadius="16.25" Margin="20,0,0,0" Background="White" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -21,10 +21,9 @@
                 </Grid>
             </Border>
             <GridSplitter />
-            <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Margin="75
+            <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Margin="80
                   ,0,0,0">
-                <Label x:Name="albumname" Content="World Fragments" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Keep Calm Med" FontSize="16" Foreground="White" />
-                <Label x:Name="albumcode" Content="DVSP-0167" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#00808080" FontFamily="Keep Calm Med" FontSize="11" Margin="0,25,0,0" Foreground="#7F808080" />
+                <TextBlock x:Name="albumname" Text="World Fragments" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent" FontFamily="Keep Calm Med" FontSize="16" Foreground="White" Width="245" Margin="0,0,0,0" TextWrapping="WrapWithOverflow" LineStackingStrategy="BlockLineHeight" />
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -40,11 +39,29 @@
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom">
             <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.RowSpan="2" Margin="20,0,0,20">
-                <Label x:Name="songname" Content="ANiMA" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Keep Calm Med" FontSize="40" Foreground="White" />
+                <Label x:Name="songname" Content="ANiMA" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="NanumBarunGothic" FontSize="40" Foreground="White" FontWeight="Bold" />
                 <GridSplitter />
-                <Label x:Name="composer" Content="xi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="#00808080" FontFamily="Keep Calm Med" FontSize="30" Margin="0,50,0,0" Foreground="#FFFFFFFF" />
+                <Label x:Name="composer" Content="xi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="#00808080" FontFamily="NanumBarunGothic" FontSize="30" Margin="0,50,0,0" Foreground="#FFFFFFFF" FontWeight="Bold" />
             </Grid>
         </Grid>
         <Label x:Name="developer" Content="Developer: AlphaGot" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00808080" FontFamily="Keep Calm Med" FontSize="11" Margin="0,25,25,0" Foreground="#7F808080" />
+        <Grid x:Name="buttons" VerticalAlignment="Top" Margin="0,50,0,0" HorizontalAlignment="Center">
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="100" Margin="0,0,75,0" Background="White" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button x:Name="play" Content="▶" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="30" Height="30" Background="{x:Null}" RenderTransformOrigin="0,0" BorderBrush="{x:Null}" FontFamily="NanumBarunGothic" FontSize="14" FontWeight="Bold" Click="PlayButtonClick" />
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="100" Margin="0,0,0,0" Background="White" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button x:Name="pause" Content="I I" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="30" Height="30" Background="{x:Null}" RenderTransformOrigin="0,0" BorderBrush="{x:Null}" FontFamily="NanumBarunGothic" FontSize="14" Click="PausButtonClick" />
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="0" CornerRadius="100" Margin="75,0,0,0" Background="White" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button x:Name="stop" Content="■" HorizontalAlignment="Center" VerticalAlignment="Center" Width="30" Height="30" Background="{x:Null}" RenderTransformOrigin="0,0" BorderBrush="{x:Null}" FontFamily="NanumBarunGothic" FontSize="14" Click="StopButtonClick" />
+                </Grid>
+            </Border>
+        </Grid>
+        <Label x:Name="timespan" Content="00:00 / 00:00" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Margin="0,100,0,0" FontFamily="Keep Calm Med" FontSize="14"/>
     </Grid>
 </Window>
