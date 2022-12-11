@@ -1,6 +1,7 @@
 ﻿using ManagedBass;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -10,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -51,42 +55,6 @@ namespace diverse_system_music_player
             }
         }
 
-        public Bitmap MakeGrayscale(Bitmap original)
-        {
-            //create a blank bitmap the same size as original
-            Bitmap newBitmap = new Bitmap(original.Width, original.Height);
-
-            //get a graphics object from the new image
-            using (Graphics g = Graphics.FromImage(newBitmap))
-            {
-
-                //create the grayscale ColorMatrix
-                ColorMatrix colorMatrix = new ColorMatrix(
-                   new float[][]
-                   {
-             new float[] {.3f, .3f, .3f, 0, 0},
-             new float[] {.59f, .59f, .59f, 0, 0},
-             new float[] {.11f, .11f, .11f, 0, 0},
-             new float[] {0, 0, 0, 1, 0},
-             new float[] {0, 0, 0, 0, 1}
-                   });
-
-                //create some image attributes
-                using (ImageAttributes attributes = new ImageAttributes())
-                {
-
-                    //set the color matrix attribute
-                    attributes.SetColorMatrix(colorMatrix);
-
-                    //draw the original image on the new image
-                    //using the grayscale color matrix
-                    g.DrawImage(original, new System.Drawing.Rectangle(0, 0, original.Width, original.Height),
-                                0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
-                }
-            }
-            return newBitmap;
-        }
-
         byte[] ConvertBitmapToByteArray(Bitmap bitmap)
         {
             byte[] result = null;
@@ -103,17 +71,14 @@ namespace diverse_system_music_player
             return result;
         }
 
-        private string StringToUnicode(string value) {
-            try
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (char c in value)
-                    sb.AppendFormat("\\u{0:X4}", (uint)c);
-                return sb.ToString();
-            }
-            catch (Exception e) {
-                return e.Message;
-            }
+        private IEnumerable<Inline> ParseInlines(string text)
+        {
+            var textBlock = (TextBlock)XamlReader.Parse(
+                "<TextBlock xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">"
+                + text
+                + "</TextBlock>");
+
+            return textBlock.Inlines.ToList(); // must be enumerated
         }
 
         public void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -148,7 +113,7 @@ namespace diverse_system_music_player
             composer.Content = "";
             songname.Content = "재생 버튼으로 파일을 재생해주세요";
 
-            albumname.Text = "";
+            albumnamer.Text = "";
             rlesedate.Content = "";
 
             Bass.Init();
@@ -174,8 +139,6 @@ namespace diverse_system_music_player
             if (!ov.Value)
                 return;
 
-            int sample = 16;
-
             if (currentSongHandle != 0) {
                 Bass.ChannelStop(currentSongHandle);
                 Bass.SampleFree(currentSongHandle);
@@ -190,7 +153,7 @@ namespace diverse_system_music_player
                 composer.Content = string.Join(", ", tr.Composers);
                 songname.Content = (tr.Title == null || tr.Title == "") ? _ofd.FileName.Split('\\').Last() : tr.Title;
 
-                albumname.Text = tr.Album;
+                albumnamer.Text = $"{tr.Album}<br><span style=\"font-size:10px; color:#3F3F3F\">{(tr.JoinedAlbumArtists != null ? "by " : "")}{tr.JoinedAlbumArtists ?? "".Replace(";", ",")}</span>";
                 rlesedate.Content = tr.Year != 0 ? tr.Year.ToString() : "";
 
                 albumCover = ToImage((tr.Pictures.Length > 0 ? tr.Pictures[0].Data.Data : ConvertBitmapToByteArray(kong)));
@@ -200,7 +163,7 @@ namespace diverse_system_music_player
                 composer.Content = "";
                 songname.Content = _ofd.FileName.Split('\\').Last();
 
-                albumname.Text = "";
+                albumnamer.Text = "";
                 rlesedate.Content = "";
 
                 albumCover = ToImage((ConvertBitmapToByteArray(kong)));

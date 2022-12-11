@@ -23,7 +23,16 @@
             <GridSplitter />
             <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.RowSpan="2" Margin="80
                   ,0,0,0">
-                <TextBlock x:Name="albumname" Text="World Fragments" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="Transparent" FontFamily="Keep Calm Med" FontSize="16" Foreground="White" Width="245" Margin="0,0,0,0" TextWrapping="WrapWithOverflow" LineStackingStrategy="BlockLineHeight" />
+                <TextBox Name="albumnamer"
+                 Margin="0,0"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Text=""
+                 TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" Height="0" Width="0" />
+                <RichTextBox  x:Name="albumname" Grid.Row="1"
+                     local:HtmlRichTextBoxBehavior.Text="{Binding ElementName=albumnamer, Path=Text}"
+                     IsDocumentEnabled="True"
+                     IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" Foreground="White" Width="245" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Keep Calm Med" FontSize="14" BorderThickness="0,0,0,0" VerticalContentAlignment="Center" />
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
